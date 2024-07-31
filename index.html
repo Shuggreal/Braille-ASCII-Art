@@ -52,13 +52,30 @@
 
         <p>
             <button id="copy">Copy</button>
-            <span id="char-count" style="display: none;">(<span id="char-count-value">0</span> characters)</span>
+            <span id="char-count">( <span id="char-count-value">0</span> characters )</span>
         </p>
 
         <div id="output" contenteditable="true"></div>
 
         <script src="dist/index.js?v=3" type="module"></script>
         <script>
+            // Function to update character count visibility
+            function updateCharCount() {
+                const output = document.getElementById('output').innerText;
+                const charCountElement = document.getElementById('char-count');
+                const charCountValueElement = document.getElementById('char-count-value');
+                const charCount = output.length;
+
+                charCountValueElement.textContent = charCount;
+
+                if (charCount > 0) {
+                    charCountElement.style.display = 'inline';
+                } else {
+                    charCountElement.style.display = 'none';
+                }
+            }
+
+            // Add event listeners
             document.getElementById('copy').addEventListener('click', function () {
                 const output = document.getElementById('output').innerText;
                 if (output.length > 0) {
@@ -70,18 +87,10 @@
                 }
             });
 
-            document.getElementById('output').addEventListener('input', function () {
-                const charCountElement = document.getElementById('char-count');
-                const charCountValueElement = document.getElementById('char-count-value');
-                const charCount = this.innerText.length;
+            document.getElementById('output').addEventListener('input', updateCharCount);
 
-                if (charCount > 0) {
-                    charCountValueElement.textContent = charCount;
-                    charCountElement.style.display = 'inline';
-                } else {
-                    charCountElement.style.display = 'none';
-                }
-            });
+            // Initial call to hide the character count on load
+            updateCharCount();
         </script>
     </div>
 
