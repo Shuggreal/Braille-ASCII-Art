@@ -13,7 +13,7 @@
 
     <div class="container">
         <h1>Braille ASCII Art</h1>
-        <p>Original by <a href="https://github.com/LachlanArthur">Lachlan</a> | Improved by <a href="https://github.com/Shuggreal">Shuggreal</a></p>
+        <p>Original by <a href="https://lach.la">Lachlan</a> | Improved by <a href="https://github.com/Shuggreal">Shuggreal</a></p>
 
         <p>
             <label for="filepicker">Image</label>
@@ -80,7 +80,11 @@
                 const output = document.getElementById('output').innerText;
                 if (output.length > 0) {
                     navigator.clipboard.writeText(output).then(function () {
-                        alert('Copied to clipboard!');
+                        // Indicate text has been copied without a pop-up
+                        document.getElementById('copy').textContent = 'Copied!';
+                        setTimeout(function() {
+                            document.getElementById('copy').textContent = 'Copy';
+                        }, 2000);
                     }, function (err) {
                         console.error('Could not copy text: ', err);
                     });
