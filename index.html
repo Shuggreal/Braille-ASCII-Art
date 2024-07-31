@@ -52,12 +52,37 @@
 
         <p>
             <button id="copy">Copy</button>
-            (<span id="char-count">0</span> characters)
+            <span id="char-count" style="display: none;">(<span id="char-count-value">0</span> characters)</span>
         </p>
 
         <div id="output" contenteditable="true"></div>
 
         <script src="dist/index.js?v=3" type="module"></script>
+        <script>
+            document.getElementById('copy').addEventListener('click', function () {
+                const output = document.getElementById('output').innerText;
+                if (output.length > 0) {
+                    navigator.clipboard.writeText(output).then(function () {
+                        alert('Copied to clipboard!');
+                    }, function (err) {
+                        console.error('Could not copy text: ', err);
+                    });
+                }
+            });
+
+            document.getElementById('output').addEventListener('input', function () {
+                const charCountElement = document.getElementById('char-count');
+                const charCountValueElement = document.getElementById('char-count-value');
+                const charCount = this.innerText.length;
+
+                if (charCount > 0) {
+                    charCountValueElement.textContent = charCount;
+                    charCountElement.style.display = 'inline';
+                } else {
+                    charCountElement.style.display = 'none';
+                }
+            });
+        </script>
     </div>
 
 </body>
