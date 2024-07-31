@@ -13,7 +13,7 @@
 
     <div class="container">
         <h1>Braille ASCII Art</h1>
-        <p>Original by <a href="https://lach.la">Lachlan</a> | Improved by <a href="https://github.com/Shuggreal">Shuggreal</a></p>
+        <p>Original by <a href="https://github.com/LachlanArthur">Lachlan</a> | Improved by <a href="https://github.com/Shuggreal">Shuggreal</a></p>
 
         <p>
             <label for="filepicker">Image</label>
@@ -55,7 +55,7 @@
             <span id="char-count">( <span id="char-count-value">0</span> characters )</span>
         </p>
 
-        <div id="output" contenteditable="true"></div>
+        <div id="output" contenteditable="true">Sample Text</div>
 
         <script src="dist/index.js?v=3" type="module"></script>
         <script>
@@ -81,9 +81,10 @@
                 if (output.length > 0) {
                     navigator.clipboard.writeText(output).then(function () {
                         // Indicate text has been copied without a pop-up
-                        document.getElementById('copy').textContent = 'Copied!';
+                        const copyButton = document.getElementById('copy');
+                        copyButton.textContent = 'Copied!';
                         setTimeout(function() {
-                            document.getElementById('copy').textContent = 'Copy';
+                            copyButton.textContent = 'Copy';
                         }, 2000);
                     }, function (err) {
                         console.error('Could not copy text: ', err);
