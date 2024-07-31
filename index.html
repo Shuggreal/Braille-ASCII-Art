@@ -55,7 +55,7 @@
             <span id="char-count">( <span id="char-count-value">0</span> characters )</span>
         </p>
 
-        <div id="output" contenteditable="true">Sample Text</div>
+        <div id="output" contenteditable="true"></div>
 
         <script src="dist/index.js?v=3" type="module"></script>
         <script>
@@ -81,10 +81,9 @@
                 if (output.length > 0) {
                     navigator.clipboard.writeText(output).then(function () {
                         // Indicate text has been copied without a pop-up
-                        const copyButton = document.getElementById('copy');
-                        copyButton.textContent = 'Copied!';
+                        document.getElementById('copy').textContent = 'Copied!';
                         setTimeout(function() {
-                            copyButton.textContent = 'Copy';
+                            document.getElementById('copy').textContent = 'Copy';
                         }, 2000);
                     }, function (err) {
                         console.error('Could not copy text: ', err);
